@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mars Data</title>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <!-- Bootstrap CDN -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="/static/style/style.css">
+
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="jumbotron jumbotron-fluid text-center"
+        style = "background-image: url('https://upload.wikimedia.org/wikipedia/commons/c/ca/016vallesmarineris.jpg');">
+            <h1 class="display-3 font-weight-bold">Mission to Mars</h1>
+            <p><a class="btn btn-primary btn-lg bg-danger" href="/scrape" role="button">Scrape New Data</a></p>
+        </div>
+
+        <div class="row" id="mars-headlines">
+            <div class="col-md-6 col-md-12">
+                <h3>Latest Mars News</h3>
+                <hr>
+                <h4>{{mars_dict['news_title']}}</h4>
+                <p class='lead'>{{mars_dict['news_p']}}</p>
+            </div>
+        </div>
+
+        <div class="row mb-2">
+            <div class="col-md-8">
+                <h2>Featured Image</h2>
+                <hr>
+                <img src="{{mars_dict['featured_image_url']}}" class= img-fluid alt="Featured image from JPL">
+            </div>
+
+            <div class="col-md-4">
+                <h3>Mars Weather</h3>
+                <hr>
+                <p style = 'font-size: larger;'>{{mars_dict['mars_weather']}}</p>
+
+                <br>
+
+                <h3>Mars Facts</h3>
+                <hr>
+                {{mars_dict['html_table']|safe}}
+            </div>
+        </div> 
+
+        <br>
+
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Martian Hemispheres</h2>
+                <hr>
+            </div>
+        </div>
+
+        <div class="row" id='mars-hemispheres'>
+            {% for image in mars_dict['hemi_imgs'] %}
+                <div class="col-md-6">
+                    <img src="{{image['img_url']}}" alt="{{image['title']}}" class="img-fluid">
+                </div>
+            {% endfor %}
+        </div>
+        
+    </div>
+
+</body>
+
+</html>
